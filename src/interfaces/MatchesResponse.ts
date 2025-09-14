@@ -1,4 +1,5 @@
-import { MatchStatus, Winner } from "../types/MatchTypes";
+type MatchStatus = "SCHEDULED" | "TIMED" | "IN_PLAY" | "PAUSED" | "FINISHED" | "POSTPONED" | "SUSPENDED" | "CANCELED";
+type Winner = "HOME_TEAM" | "AWAY_TEAM" | "DRAW" | null;
 
 export interface Team {
   id: number;
