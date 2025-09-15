@@ -1,5 +1,4 @@
 import { MatchesResponse } from "../../../interfaces/MatchesResponse";
-import { ApiResult } from "../../../types/api";
 import { BaseRedisRepository } from "../base-redis.repository";
 
 export class MatchesRepository extends BaseRedisRepository {
@@ -9,8 +8,8 @@ export class MatchesRepository extends BaseRedisRepository {
     super({ prefix: "fd:matches", defaultTtlSeconds: MatchesRepository.DEFAULT_TTL });
   }
 
-  async getByDate(dateKey: string) {
-    return this.getJson<ApiResult<MatchesResponse>>(dateKey);
+  async getByDate(dateKey: string): Promise<MatchesResponse | null> {
+    return await this.getJson<MatchesResponse>(dateKey);
   }
 
   async saveByDate(dateKey: string, data: MatchesResponse, ttl?: number) {

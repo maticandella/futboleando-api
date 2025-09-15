@@ -1,4 +1,9 @@
 node_modules
 package.json.lock
 .env
-dist
+.pnpm-store/
+.pnpm-debug.log
+dist/
+build/
+docker-compose.override.yml
+*.pid

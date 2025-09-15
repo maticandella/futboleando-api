@@ -26,6 +26,9 @@ importers:
       node-cron:
         specifier: 4.2.1
         version: 4.2.1
+      zod:
+        specifier: 4.1.8
+        version: 4.1.8
     devDependencies:
       '@types/cors':
         specifier: 2.8.19
@@ -522,6 +525,9 @@ packages:
   yn@3.1.1:
     resolution: {integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==}
     engines: {node: '>=6'}
+
+  zod@4.1.8:
+    resolution: {integrity: sha512-5R1P+WwQqmmMIEACyzSvo4JXHY5WiAFHRMg+zBZKgKS+Q1viRa0C1hmUKtHltoIFKtIdki3pRxkmpP74jnNYHQ==}
 
 snapshots:
 
@@ -1025,3 +1031,5 @@ snapshots:
   wrappy@1.0.2: {}
 
   yn@3.1.1: {}
+
+  zod@4.1.8: {}

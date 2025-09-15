@@ -3,6 +3,7 @@ import { getMatchesByDate } from "../services/match.service";
 import { ApiResult } from "../types/api";
 import { RefreshTodayPayload } from "../types/job";
 import { getTodayRangeUtcForTZ } from "../utils/datetime";
+import { getMatchesDateKey } from "../utils/keys";
 
 const matchesRepository = new MatchesRepository();
 
@@ -26,7 +27,7 @@ export async function refreshTodayMatches(): Promise<ApiResult<RefreshTodayPaylo
         dateKey,
         count: data.resultSet?.count ?? data.matches?.length ?? 0,
         ttl: MatchesRepository.DEFAULT_TTL,
-        key: `fd:matches:${dateKey}`,
+        key: getMatchesDateKey(dateKey),
       },
     };
   } catch (err: any) {

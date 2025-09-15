@@ -1,14 +1,23 @@
 import express from "express";
 import { refreshTodayMatches } from "./jobs/refresh-matches.job";
+import matchesRoutes from './routes/matches.routes';
 
 const PORT = Number(process.env.PORT);
 
 const app = express();
 app.use(express.json());
 
-app.listen(PORT, async () => {
-  console.log(`API listening on http://localhost:${PORT}`);
+app.use('/api/matches', matchesRoutes);
 
-  //TODO hacer endpoint para devolver lo cacheado
-  const result = await refreshTodayMatches();
+async function bootstrap() {
+  await refreshTodayMatches();
+
+  app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}/`);
+  });
+}
+
+bootstrap().catch(err => {
+  console.error('❌ Error en bootstrap:', err);
+  process.exit(1);
 });

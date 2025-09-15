@@ -43,14 +43,14 @@ export abstract class BaseRedisRepository {
 
     //* Manejo de JSONs
     async getJson<T>(...parts: (string | number)[]): Promise<T | null> {
-    const key = this.key(...parts);
-    const raw = await redis.get(key);
-    if (!raw) return null;
-    try {
-        return JSON.parse(raw) as T;
-    } catch {
-        return null;
-    }
+        const key = this.key(...parts);
+        const raw = await redis.get(key);
+        if (!raw) return null;
+        try {
+            return JSON.parse(raw) as T;
+        } catch {
+            return null;
+        }
     }
 
     async setJson<T>(
