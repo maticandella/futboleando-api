@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import { getDateRangeUtcForTZ } from '../utils/datetime';
-import { getMatchesByDate } from '../services/match.service';
+import { getMatchDetails, getMatchesByDate } from '../services/match.service';
 import { MatchByDateDTO } from '../dtos/matches.dto';
+import { MatchDetailsDTO } from '../dtos/match-details.dto';
 
 export const getMatches = async(req: Request, res: Response) => {
     try {
@@ -19,7 +20,24 @@ export const getMatches = async(req: Request, res: Response) => {
         const items = await getMatchesByDate(startUtc ?? '', endUtc  ?? '');
         res.json(items);
   } catch (e) {
-    console.error('❌ Error en getGamesToday:', e);
+    res.status(500).json({ message: 'Error interno del servidor' });
+  }
+};
+
+export const getMatch = async(req: Request, res: Response) => {
+    try {
+        const paramsDTO = MatchDetailsDTO.safeParse(req.params);
+        if (!paramsDTO.success) {
+          return res.status(400).json({
+            message: "Error de validación",
+            errors: paramsDTO.error,
+          });
+        }
+
+        const { id } = paramsDTO.data;
+        const match = await getMatchDetails(id);
+        res.json(match);
+  } catch (e) {
     res.status(500).json({ message: 'Error interno del servidor' });
   }
 };
